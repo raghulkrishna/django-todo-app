@@ -49,7 +49,7 @@ def loginuser(request):
 
 @login_required()
 def currenttodos(request):
-    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True)
+    todos = Todo.objects.filter(user=request.user, datecompleted__isnull=True,deleted__isnull=True)
     return render(request, 'todo/currenttodos.html', {'todos': todos})
 
 
@@ -97,11 +97,28 @@ def completetodo(request, todo_pk):
 
 
 @login_required()
+def recentlydeleted(request):
+    todos = Todo.objects.filter(user=request.user,deleted__isnull=False)
+    return render(request,'todo/recentlydeleted.html',{'todos': todos})
+
+
+
+@login_required()
 def deletetodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'POST':
-        todo.delete()
+        print(todo.title,"delete")
+        todo.deleted = timezone.now()
+        todo.save()
         return redirect('currenttodos')
+
+@login_required()
+def deletecompletetodo(request, todo_pk):
+    todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('recentlydeleted')
+
 
 
 @login_required()

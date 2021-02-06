@@ -19,18 +19,20 @@ from todo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-path('home/',views.home,name = 'home'),
+    path('home/',views.home,name = 'home'),
     path('current/',views.currenttodos,name = 'currenttodos'),
-path('create/',views.createtodos,name = 'createtodo'),
-path('completed/',views.completedtodos,name = 'completedtodos'),
-
+    path('create/',views.createtodos,name = 'createtodo'),
+    path('completed/',views.completedtodos,name = 'completedtodos'),
+    path('recentlydeleted/',views.recentlydeleted,name = 'recentlydeleted'),
     path('todo/<int:todo_pk>', views.viewtodo, name='viewtodo'),
     path('todo/<int:todo_pk>/complete', views.completetodo, name='completetodo'),
-path('todo/<int:todo_pk>/delete', views.deletetodo, name='deletetodo'),
+    path('todo/<int:todo_pk>/delete', views.deletetodo, name='deletetodo'),
+    path('todo/<int:todo_pk>/deletecomplete', views.deletecompletetodo, name='deletecompletetodo'),
+
 
     #Auth
     path('signupuser/',views.signupuser,name = 'signupuser'),
-path('logoutuser/',views.logoutuser,name = 'logoutuser'),
-path('loginuser/',views.loginuser,name = 'loginuser')
+    path('logoutuser/',views.logoutuser,name = 'logoutuser'),
+    path('loginuser/',views.loginuser,name = 'loginuser')
 
 ]

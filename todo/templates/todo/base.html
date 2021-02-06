@@ -38,6 +38,10 @@
                     <a class="nav-link" href="{% url 'createtodo' %}">Create</a>
                 </li>
 
+                <li class="nav-item {{ recentlydeleted }}">
+                    <a class="nav-link" href="{% url 'recentlydeleted' %}">Recently Deleted</a>
+                </li>
+
         </ul>
     {% endif %}
     <ul class="navbar-nav ml-auto">

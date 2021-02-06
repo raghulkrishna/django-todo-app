@@ -6,7 +6,7 @@ class Todo(models.Model):
     memo = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     datecompleted = models.DateTimeField(null=True, blank=True)
-
+    deleted =  models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     prio = (('H','High'),('M','Medium'),('L','Low'))
     priority = models.CharField(max_length=1, choices=prio)
